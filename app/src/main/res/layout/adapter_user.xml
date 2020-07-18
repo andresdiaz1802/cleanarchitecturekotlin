@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/CardViewTheme">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/TextViewTheme.H1"
+            android:text="@string/name" />
+
+        <TextView
+            android:id="@+id/tvSeparator"
+            style="@style/Separate"
+            android:layout_below="@id/tvName" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            style="@style/TextViewTheme.Subtitle"
+            android:layout_below="@id/tvSeparator"
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:text="@string/email" />
+
+        <TextView
+            android:id="@+id/tvPhone"
+            style="@style/TextViewTheme.Subtitle"
+            android:layout_below="@id/tvEmail"
+            android:drawableStart="@drawable/ic_baseline_local_phone_24"
+            android:text="@string/phone" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
