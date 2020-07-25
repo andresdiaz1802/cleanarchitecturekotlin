@@ -1,6 +1,6 @@
 package com.ceiba.cleanarchitecturekotlin.domain.tools
 
-import com.ceiba.cleanarchitecturekotlin.data.api.entities.UserEntity
+import com.ceiba.cleanarchitecturekotlin.data.entities.UserEntity
 import com.ceiba.cleanarchitecturekotlin.domain.entities.UserDomain
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -16,11 +16,23 @@ class MapperObjects {
 
         fun toSerializer(any: Any?): String? = if (any == null) any else gson.toJson(any)
 
-        fun toSubscribeSingles(single: Single<UserEntity?>) = single
+        fun toSubscribeSingleUser(single: Single<UserEntity?>) = single
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
-        fun toSubscribeSingle(single: Single<List<UserEntity>>) = single
+        fun toSubscribeSingleUsers(single: Single<List<UserEntity>>) = single
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+        fun toSubscribeSingleInt(single: Single<Int>) = single
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+        fun toSubscribeSingleLong(single: Single<Long>) = single
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+        fun toSubscribeSingleLongs(single: Single<List<Long>>) = single
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
@@ -36,6 +48,20 @@ class MapperObjects {
         fun toUsersDomain(users: List<UserEntity>): List<UserDomain> {
             val serializer = toSerializer(users)
             val type = object : TypeToken<List<UserDomain>>() {}.type
+            return gson.fromJson(serializer, type)
+        }
+
+        // Entity
+
+        fun toUserEntity(user: UserDomain): UserEntity? {
+            val serializer = toSerializer(user)
+            return if (serializer == null) null
+            else gson.fromJson(serializer, UserEntity::class.java)
+        }
+
+        fun toUsersEntity(users: List<UserDomain>): List<UserEntity> {
+            val serializer = toSerializer(users)
+            val type = object : TypeToken<List<UserEntity>>() {}.type
             return gson.fromJson(serializer, type)
         }
 

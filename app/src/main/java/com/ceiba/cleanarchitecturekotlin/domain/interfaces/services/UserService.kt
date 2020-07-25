@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface UserService {
     fun consultUser(id: Int): Single<UserDomain?>
-    fun consultUsers(): Single<Any>
+    fun consultUsers(): Single<List<UserDomain>?>
 }

@@ -5,10 +5,15 @@ import com.ceiba.cleanarchitecturekotlin.domain.interfaces.repositories.UserRepo
 import com.ceiba.cleanarchitecturekotlin.domain.interfaces.services.UserService
 import io.reactivex.Single
 
-class UserServiceImpl(private val userRepository: UserRepository) : UserService {
+class UserServiceImpl(
+    private val userRepositoryApi: UserRepository,
+    private val userRepositoryLocal: UserRepository
+) : UserService {
 
-    override fun consultUser(id: Int): Single<UserDomain?> = userRepository.select(id)
+    override fun consultUser(id: Int): Single<UserDomain?> = userRepositoryApi.select(id)
 
-    override fun consultUsers(): Single<Any> = userRepository.select()
+    override fun consultUsers(): Single<List<UserDomain>?> = userRepositoryLocal.select()
+        .flatMap { users -> if (users.isEmpty()) userRepositoryApi.select() else Single.just(users) }
+        .flatMap { users -> userRepositoryLocal.update(users) }
         .map { users -> if (users.isEmpty()) null else users }
 }

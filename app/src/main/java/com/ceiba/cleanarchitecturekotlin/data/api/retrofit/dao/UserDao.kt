@@ -1,8 +1,8 @@
-package com.ceiba.cleanarchitecturekotlin.data.api.dao
+package com.ceiba.cleanarchitecturekotlin.data.api.retrofit.dao
 
 import com.ceiba.cleanarchitecturekotlin.data.Constants.Companion.ID
 import com.ceiba.cleanarchitecturekotlin.data.Constants.Companion.USERS
-import com.ceiba.cleanarchitecturekotlin.data.api.entities.UserEntity
+import com.ceiba.cleanarchitecturekotlin.data.entities.UserEntity
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
